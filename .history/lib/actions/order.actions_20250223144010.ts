@@ -346,7 +346,7 @@ export async function getAllOrders({
   };
 }
 
-export async function deleteOrder(id: string): Promise<{ success: boolean; message: string }> {
+export async function deleteOrder(id: string) {
   try {
     await prisma.order.delete({ where: { id } });
 
@@ -357,8 +357,7 @@ export async function deleteOrder(id: string): Promise<{ success: boolean; messa
       message: 'Order deleted successfully',
     };
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Failed to delete order';
-    return { success: false, message: errorMessage };
+    return { success: false, message: formatError(error) };
   }
 }
 

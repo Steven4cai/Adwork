@@ -110,29 +110,6 @@ const OrderDetailsTable = ({
     );
   };
 
-  const MarkAsDeliveredButton = () => {
-    const [isPending, startTransition] = useTransition();
-    const { toast } = useToast();
-
-    return (
-      <Button
-        type='button'
-        disabled={isPending}
-        onClick={() =>
-          startTransition(async () => {
-            const res = await deliverOrder(order.id);
-            toast({
-              variant: res.success ? 'default' : 'destructive',
-              description: res.message,
-            });
-          })
-        }
-      >
-        {isPending ? 'processing...' : 'Mark As Delivered'}
-      </Button>
-    );
-  };
-
   return (
     <>
       <h1 className='py-4 text-2xl'>Order {formatId(id)}</h1>
